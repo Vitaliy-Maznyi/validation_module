@@ -12,11 +12,17 @@ module Validations
     klass.extend(::Validations::ClassMethods)
   end
 
-  def valid?
-    true
+  def validate!
+    ::Validations::Context.validators.each do |validator|
+      validator[:module].validate!(
+        attribute: validator[:attribute].to_s,
+        value: instance_variable_get("@#{validator[:attribute]}"),
+        expectation: validator[:expectation]
+      )
+    end
   end
 
-  def validate!
+  def valid?
     ::Validations::Context.validators.each do |validator|
       validator[:module].validate(
         attribute: validator[:attribute].to_s,
@@ -24,5 +30,10 @@ module Validations
         expectation: validator[:expectation]
       )
     end
+    errors.blank?
+  end
+
+  def errors
+    ::Validations::Context.errors
   end
 end

@@ -1,5 +1,7 @@
 module Validations
   module Context
+    extend self
+
     VALIDATORS_MODULES = {
       absence: ::Validation::Absence,
       presence: ::Validation::Presence,
@@ -7,15 +9,25 @@ module Validations
       type: ::Validation::Type,
     }
 
-    def self.validators
+    def validators
       @validators ||= []
     end
 
-    def self.set_validator(attribute, validator_type, expectation)
+    def errors
+      @errors ||= []
+    end
+
+    def add_validator(attribute, validator_type, expectation)
       validators << {
         attribute: attribute,
         module: VALIDATORS_MODULES[validator_type],
         expectation: expectation
+      }
+    end
+
+    def add_error(attribute, msg)
+      errors << {
+        attribute => msg
       }
     end
   end

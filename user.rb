@@ -18,12 +18,3 @@ class User
   validate :email, format: /[^@]+@[^\.]+\..+/
   validate :password, type: String
 end
-
-@user = User.new(
-  first_name: 'John',
-  last_name: 'Doe',
-  email: 'john_doe@example.com',
-  password: '123456',
-)
-
-@user.validate!
