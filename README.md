@@ -5,6 +5,10 @@ Validation module which was written using plain ruby.
 
 Contains a class method `validate`. This method takes two arguments: attribute name and options with validation types and rules.
 
+### Prerequisites
+Before you started, make sure that you have installed and set-up properly:
+- ruby 2.6.3
+
 ### Validation types:
 - **presence** - requires an attribute to be neither nil nor an empty string.
 
@@ -36,7 +40,7 @@ run `ruby test_validations.rb` in the terminal to see output of validations usag
 
 feel free to uncomment `binding.pry` in `test_validations.rb` file to play around with different validations
 
-Output example:
+**Output example:**
 ```
 -> ruby test_validations.rb
 
